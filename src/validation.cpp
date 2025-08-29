@@ -2760,9 +2760,22 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
             CDiskBlockPos _pos;
             if (!FindUndoPos(state, pindex->nFile, _pos, ::GetSerializeSize(blockundo, SER_DISK, CLIENT_VERSION) + 40))
                 return error("ConnectBlock(): FindUndoPos failed");
-            if (!UndoWriteToDisk(blockundo, _pos, pindex->pprev->GetBlockHash(), chainparams.MessageStart()))
-                return AbortNode(state, "Failed to write undo data");
+      //      if (!UndoWriteToDisk(blockundo, _pos, pindex->pprev->GetBlockHash(), chainparams.MessageStart()))
+      //          return AbortNode(state, "Failed to write undo data");
+	//**
+	// Only write undo for non-genesis blocks
+	if (pindex->pprev) {
+ 	   if (!UndoWriteToDisk(blockundo, _pos, pindex->pprev->GetBlockHash(), chainparams.MessageStart()))
+  	      return AbortNode(state, "Failed to write undo data");
+ 	   // if you set undo pos later, this will still be valid
+  	  pindex->nUndoPos = _pos.nPos;
+	} 	else {
+   	 // Genesis block: no undo data by definition
+   	 _pos = CDiskBlockPos(0, 0);
+   	 pindex->nUndoPos = 0;
+	}
 
+//**
             // update nUndoPos in block index
             pindex->nUndoPos = _pos.nPos;
             pindex->nStatus |= BLOCK_HAVE_UNDO;

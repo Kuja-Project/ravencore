@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2021 The Raven Core developers
+// Copyright (c) 2017-2021 The Ravencoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -703,7 +703,7 @@ void RavenGUI::createToolBars()
         labelCurrentMarket->setAlignment(Qt::AlignVCenter);
         labelCurrentMarket->setStyleSheet(STRING_LABEL_COLOR);
         labelCurrentMarket->setFont(currentMarketFont);
-        labelCurrentMarket->setText(tr("Ravencoin Market Price"));
+        labelCurrentMarket->setText(tr("Market Price (coming soon)"));
 
         QString currentPriceStyleSheet = ".QLabel{color: %1;}";
         labelCurrentPrice->setContentsMargins(25,0,0,0);
@@ -722,7 +722,7 @@ void RavenGUI::createToolBars()
         comboRvnUnit->setStyleSheet(STRING_LABEL_COLOR);
         comboRvnUnit->setFont(currentMarketFont);
 
-        labelVersionUpdate->setText("<a href=\"https://github.com/RavenProject/Ravencoin/releases\">New Wallet Version Available</a>");
+        labelVersionUpdate->setText("<a href=\"#\">New Wallet Version Available</a>");
         labelVersionUpdate->setTextFormat(Qt::RichText);
         labelVersionUpdate->setTextInteractionFlags(Qt::TextBrowserInteraction);
         labelVersionUpdate->setOpenExternalLinks(true);
@@ -896,7 +896,7 @@ void RavenGUI::createToolBars()
                                            "New Wallet Version Found",
                                            CClientUIInterface::MSG_VERSION | CClientUIInterface::BTN_NO);
                                    if (fRet) {
-                                       QString link = "https://github.com/RavenProject/Ravencoin/releases";
+                                       QString link = "#";
                                        QDesktopServices::openUrl(QUrl(link));
                                    }
                                }
@@ -1893,6 +1893,6 @@ void RavenGUI::mnemonic()
 
 void RavenGUI::getLatestVersion()
 {
-    versionRequest->setUrl(QUrl("https://api.github.com/repos/RavenProject/Ravencoin/releases"));
+    versionRequest->setUrl(QUrl());
     networkVersionManager->get(*versionRequest);
 }

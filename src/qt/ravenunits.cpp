@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2017-2019 The Ravencoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -41,10 +41,15 @@ QString RavenUnits::name(int unit)
 {
     switch(unit)
     {
-    case RVN: return QString("RVN");
-    case mRVN: return QString("mRVN");
-    case uRVN: return QString::fromUtf8("μRVN");
+   // case RVN: return QString("RVN");
+   // case mRVN: return QString("mRVN");
+   // case uRVN: return QString::fromUtf8("μRVN");
+    case RVN: return QString("RVCR");
+    case mRVN: return QString("mRVC");
+    case uRVN: return QString::fromUtf8("µRVC");
     default: return QString("???");
+    
+    
     }
 }
 
